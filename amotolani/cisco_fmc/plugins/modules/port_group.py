@@ -14,7 +14,7 @@ description:
 options:
   name:
     description:
-      - The name of the cisco_fmc object to be created, modified or deleted.
+      - The name of the cisco_fmc port group object to be created, modified or deleted.
     type: str
     required: true
   state:

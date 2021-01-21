@@ -20,20 +20,15 @@ options:
       - Whether to create/modify (C(present)), or remove (C(absent)) an object.
     type: str
     required: true
-  protocol:
-    description:
-      - The network port protocol.
-      - Supported choices are TCP and UDP
-    type: str
-    required: true
   fmc:
     description:
       - IP address or FQDN of Cisco FMC.
     type: str
     required: true
-  port:
+  interface_mode:
     description:
-      - Port/Port Range value of cisco_fmc object.
+      - interface_mode for security zone.
+      - Allowed values ['routed', 'switched', 'asa', 'inline', 'passive']
     type: str
     required: true
   username:
@@ -58,23 +53,20 @@ options:
 EXAMPLES = r'''
 - name: Create Security Zone objects and deploy changes
   amotolani.cisco_fmc.security_zone:
-    name: "{{item.name}}"
+    name: Zone-1
     state: present
-    port: "{{item.port}}"
+    interface_mode: switched
     fmc: ciscofmc.sample.com
     protocol: "{{item.protocol}}"
     username: admin
     password: Cisco1234
     auto_deploy: True
-  loop:
-    - {name: port1 , port: 10100 , protocol: UDP}
-    - {name: port2 , port: 11001-11004, protocol: TCP}
 
 - name: Delete  Security Zone objects
   amotolani.cisco_fmc.security_zone:
-    name: ApplicationPort
+    name: Zone-2
     state: absent
-    port: 7000
+    interface_mode: inline
     fmc: ciscofmc.sample.com
     protocol: TCP
     username: admin

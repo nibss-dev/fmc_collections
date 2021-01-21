@@ -9,13 +9,13 @@ DOCUMENTATION = r'''
 ---
 author: Adelowo David (@amotolani)
 module: amotolani.cisco_fmc.network_group
-short_description: Create, Modify and Delete Cisco FMC network objects
+short_description: Create, Modify and Delete Cisco FMC network group objects
 description:
-  - Create, Modify and Delete Cisco FMC network objects.
+  - Create, Modify and Delete Cisco FMC network group objects.
 options:
   name:
     description:
-      - The name of the cisco_fmc object to be created, modified or deleted.
+      - The name of the cisco_fmc network group object to be created, modified or deleted.
     type: str
     required: true
   state:

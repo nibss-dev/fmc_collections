@@ -2,7 +2,7 @@
 from fmcapi import *
 from ansible.module_utils.basic import AnsibleModule
 import fmcapi.api_objects.helper_functions
-import base64
+#import base64
 import requests
 
 DOCUMENTATION = r'''
@@ -192,24 +192,26 @@ def main():
 
     # Custom argument validations
     # More of these are needed
-    encodedbytes = base64.b64encode(bytes(username + ':' + password, 'utf-8'))
-    encodedstr = str(encodedbytes, "utf-8")
 
-    url = "https://{}/api/fmc_platform/v1/auth/generatetoken".format(fmc)
-    payload = {}
-    headers = {
-        'Authorization': 'Basic {}'.format(encodedstr)
-    }
+    # encodedbytes = base64.b64encode(bytes(username + ':' + password, 'utf-8'))
+    # encodedstr = str(encodedbytes, "utf-8")
+    #
+    # url = "https://{}/api/fmc_platform/v1/auth/generatetoken".format(fmc)
+    # payload = {}
+    # headers = {
+    #     'Authorization': 'Basic {}'.format(encodedstr)
+    # }
+    #
+    # try:
+    #     response = requests.request("POST", url, headers=headers, data=payload, verify=False)
+    #     response.raise_for_status()
+    # except requests.exceptions.ConnectionError as hrr:
+    #     result = dict(unreachable=True, msg='Unable to establish network connection to FMC')
+    #     module.exit_json(**result)
+    # except requests.exceptions.HTTPError as err:
+    #     result = dict(failed=True, msg='Connection to FMC failed. Reason: {}'.format(err))
+    #     module.exit_json(**result)
 
-    try:
-        response = requests.request("POST", url, headers=headers, data=payload, verify=False)
-        response.raise_for_status()
-    except requests.exceptions.ConnectionError as hrr:
-        result = dict(unreachable=True, msg='Unable to establish network connection to FMC')
-        module.exit_json(**result)
-    except requests.exceptions.HTTPError as err:
-        result = dict(failed=True, msg='Connection to FMC failed. Reason: {}'.format(err))
-        module.exit_json(**result)
 
     with FMC(host=fmc, username=username, password=password, autodeploy=auto_deploy) as fmc1:
 
